@@ -1,0 +1,7 @@
+CREATE TABLE vehicles (
+  id SERIAL PRIMARY KEY,
+  brand VARCHAR(255) NOT NULL,
+  model VARCHAR(255) NOT NULL,
+  year INTEGER NOT NULL,
+  registration VARCHAR(255) NOT NULL UNIQUE
+)
