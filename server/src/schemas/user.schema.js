@@ -22,12 +22,23 @@ export const createUserSchema = z.object({
     .email({
       message: "Invalid email format",
     }),
-  age: z
+  age: z.coerce
     .number({
       required_error: "Age is required",
     })
+    .int()
     .min(18, {
       message: "You must be at least 18 years old",
+    }),
+  phone_number: z
+    .string({
+      required_error: "Phone number is required",
+    })
+    .min(10, {
+      message: "Phone number must be at leat 10 digits",
+    })
+    .max(15, {
+      message: "Phone number must be a maximum of 15 digits",
     }),
 });
 

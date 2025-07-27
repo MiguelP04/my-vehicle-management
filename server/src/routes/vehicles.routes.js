@@ -5,8 +5,11 @@ import {
   getAllVehicles,
   getVehicle,
   updateVehicle,
+  getOwner,
+  getVehicleHistory,
 } from "../controller/vehicles.controller.js";
 import { validateSchema } from "../middlewares/validator.middleware.js";
+import { upload } from "../middlewares/multer.middleware.js";
 import {
   createVehicleSchema,
   updateVehicleSchema,
@@ -16,11 +19,32 @@ const router = express.Router();
 
 router.get("/", getAllVehicles);
 
-router.post("/", validateSchema(createVehicleSchema), createVehicle);
-
 router.get("/:id", getVehicle);
 
-router.put("/:id", validateSchema(updateVehicleSchema), updateVehicle);
+router.get("/:id/history", getVehicleHistory);
+
+router.get("/owner/:id", getOwner);
+
+router.post(
+  "/",
+  upload.single("image"),
+  validateSchema(createVehicleSchema),
+  createVehicle
+);
+
+router.put(
+  "/:id",
+  upload.single("image"),
+  validateSchema(updateVehicleSchema),
+  updateVehicle
+);
+
+router.patch(
+  "/:id",
+  upload.single("image"),
+  validateSchema(updateVehicleSchema),
+  updateVehicle
+);
 
 router.delete("/:id", deleteVehicle);
 

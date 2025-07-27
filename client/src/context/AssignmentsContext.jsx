@@ -1,9 +1,13 @@
 import { createContext, useContext, useState } from "react";
-import { getAssignmentsRequest } from "../api/assignments";
+import {
+  createAssignmentRequest,
+  getAssignmentsRequest,
+  updateAssignmentRequest,
+} from "../api/assignments";
 
 const AssignmentContext = createContext();
 
-export const useAssingments = () => {
+export const useAssignments = () => {
   const context = useContext(AssignmentContext);
 
   if (!context) {
@@ -20,13 +24,43 @@ export const AssignmentProvider = ({ children }) => {
     try {
       const res = await getAssignmentsRequest();
       setAssignments(res.data);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const createAssignment = async (data) => {
+    try {
+      const res = await createAssignmentRequest(data);
+      setAssignments((prev) => [...prev, res.data]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const updateAssignment = async (id) => {
+    try {
+      await updateAssignmentRequest(id);
+
+      setAssignments((prev) =>
+        prev.map((a) =>
+          a.id === id ? { ...a, delivery_date: new Date().toISOString() } : a
+        )
+      );
+    } catch (err) {
+      console.error(err);
     }
   };
 
   return (
-    <AssignmentContext.Provider value={{ assignments, getAssignments }}>
+    <AssignmentContext.Provider
+      value={{
+        assignments,
+        getAssignments,
+        createAssignment,
+        updateAssignment,
+      }}
+    >
       {children}
     </AssignmentContext.Provider>
   );
