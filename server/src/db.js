@@ -5,13 +5,10 @@ dotenv.config();
 const { Pool } = pkg;
 
 const pool = new Pool({
-  user: process.env.USER_DB,
-  password: process.env.PASSWORD_DB,
-  host: process.env.HOST_DB,
-  port: process.env.PORT_DB,
-  database: process.env.NAME_DB,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false, // necesario para Render
+  },
 });
-
-console.log(process.env.USER_DB);
 
 export default pool;
