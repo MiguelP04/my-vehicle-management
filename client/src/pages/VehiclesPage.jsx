@@ -276,7 +276,7 @@ export default function VehiclesPage() {
                     <>
                       <div>
                         <Avatar
-                          src={`http://localhost:4000/uploads/${
+                          src={`https://my-vehicle-management.onrender.com/uploads/${
                             owners[vehicle.id]?.image
                           }`}
                           alt={`${owners[vehicle.id]?.name} ${
