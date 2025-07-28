@@ -153,7 +153,7 @@ function UsersPage() {
             >
               <div className="relative flex items-center gap-4 px-8 py-2 mt-4">
                 <Avatar
-                  src={`http://localhost:4000/uploads/${user.image}`}
+                  src={`https://my-vehicle-management.onrender.com/uploads/${user.image}`}
                   alt={`${user.name} ${user.last_name}`}
                   sx={{ width: 56, height: 56 }}
                 />

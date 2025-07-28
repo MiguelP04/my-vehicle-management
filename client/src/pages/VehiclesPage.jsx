@@ -228,7 +228,7 @@ export default function VehiclesPage() {
             >
               <div
                 style={{
-                  backgroundImage: `url(http://localhost:4000/uploads/${vehicle.image})`,
+                  backgroundImage: `url(https://my-vehicle-management.onrender.com/uploads/${vehicle.image})`,
                 }}
                 className="relative h-52 w-full bg-cover bg-center rounded-t-lg"
               >
